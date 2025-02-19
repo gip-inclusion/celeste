@@ -1,0 +1,21 @@
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: gpsx_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: gpsx
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5438:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    driver: bridge

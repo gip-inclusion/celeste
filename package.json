@@ -1,0 +1,33 @@
+{
+  "name": "gps-x",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "db:init": "ts-node scripts/init-db.ts",
+    "db:migrate": "npx prisma migrate dev",
+    "db:migrate:prod": "npx prisma migrate deploy",
+    "db:client:generate": "npx prisma generate",
+    "db:studio": "npx prisma studio",
+    "build": "npm run db:client:generate && tsc",
+    "start": "npm run build && node dist/index",
+    "dev": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.4.0",
+    "@prisma/extension-accelerate": "^1.2.2",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "fastify-plugin": "^5.0.1",
+    "prisma": "^6.4.0"
+  }
+}
