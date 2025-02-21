@@ -2,10 +2,10 @@ services:
 
   postgres:
     image: postgres:15
-    container_name: gpsx_postgres
+    container_name: celeste_postgres
     restart: always
     environment:
-      POSTGRES_DB: gpsx
+      POSTGRES_DB: celeste
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
     ports:

@@ -1,6 +1,6 @@
 {
-  "name": "gps-x",
-  "version": "1.0.0",
+  "name": "celeste",
+  "version": "0.1.0",
   "main": "index.js",
   "scripts": {
     "db:init": "ts-node scripts/init-db.ts",
