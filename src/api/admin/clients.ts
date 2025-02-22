@@ -3,7 +3,7 @@ import { FastifyInstance } from 'fastify';
 import { verifyAdminApiToken } from '../../middleware/adminAuth';
 import prisma from '../../database';
 
-export default function (fastify: FastifyInstance, opts: any, done: () => void) {
+export default function (fastify: FastifyInstance, opts: unknown, done: () => void) {
   fastify.addHook('preHandler', verifyAdminApiToken);
 
   fastify.get(

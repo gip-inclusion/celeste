@@ -14,7 +14,7 @@ const ALLOWED_EVENT_SOURCES = [
 
 const ALLOWED_ACTOR_TYPES = ['admin', 'beneficiary', 'purchaser', 'employee', 'prescriber'];
 
-export default function (fastify: FastifyInstance, opts: any, done: () => void) {
+export default function (fastify: FastifyInstance, opts: unknown, done: () => void) {
   fastify.addHook('preHandler', verifyApiToken);
 
   fastify.get(
@@ -72,7 +72,7 @@ export default function (fastify: FastifyInstance, opts: any, done: () => void) 
           actor_type: string;
           beneficiary_sub?: string;
           structure_sub?: string;
-          payload: any;
+          payload: never;
         };
 
         const client = (request as AuthenticatedRequest).client;
