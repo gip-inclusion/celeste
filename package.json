@@ -10,7 +10,7 @@
     "db:studio": "npx prisma studio",
     "build": "npm run db:client:generate && tsc",
     "start": "npm run build && node dist/index",
-    "dev": "db:client:generate && ts-node src/index.ts",
+    "dev": "npm run db:client:generate && ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

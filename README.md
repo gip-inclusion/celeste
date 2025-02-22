@@ -57,7 +57,7 @@ curl -X POST "http://localhost:3000/api/admin/clients" \
 ```
 curl -X POST "http://localhost:3000/api/events" \
      -H "Content-Type: application/json" \
-     -H "x-api-token: f01b88dee11254a66036fbfc3ce0e251a030b5ac7186e1123d101800236fecf9" \
+     -H "x-api-token: < le_token_du_client >" \
      -d '{
           "event_type": "if.application.submitted",
           "event_source": "immersion-facilitee",
