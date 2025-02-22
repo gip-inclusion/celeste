@@ -1,8 +1,9 @@
 import { FastifyRequest, FastifyReply } from "fastify";
+import settings from "../settings";
 
 export async function verifyAdminApiToken(request: FastifyRequest, reply: FastifyReply) {
   const apiToken = request.headers["x-api-token"];
-  const adminApiToken = process.env.ADMIN_API_TOKEN;
+  const adminApiToken = settings.api.adminToken;
 
   if (!apiToken || typeof apiToken !== "string") {
     return reply.status(401).send({ error: "Missing or invalid API token" });

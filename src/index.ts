@@ -1,14 +1,10 @@
-import server from './server';
+import fastify from './server';
 import prisma from './database';
-
-const NODE_ENV = process.env.NODE_ENV || "development";
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-const HOST = process.env.HOST || "0.0.0.0";
+import settings from './settings';
 
 async function main() {
     try {
-        await server.listen({ port: PORT, host: HOST });
-        console.log(`🚀 Serveur démarré sur http://${HOST}:${PORT} [environment=${NODE_ENV}]`);
+        return fastify.listen({ port: settings.server.port, host: settings.server.host });
     } catch (err) {
         console.error(err);
         process.exit(1);
@@ -16,8 +12,8 @@ async function main() {
 }
 
 main()
-    .then(async () => {
-        await prisma.$disconnect()
+    .then((address) => {
+        console.log(`🚀 Serveur démarré sur ${address} [environment=${settings.environment}]`);
     })
     .catch(async (e) => {
         console.error(e)

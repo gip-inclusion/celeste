@@ -1,18 +1,13 @@
 import { execSync } from "child_process";
-import * as dotenv from "dotenv";
+import settings from "../src/settings"
 
-// Charger les variables d'environnement
-dotenv.config();
-
-const DATABASE_URL = process.env.DATABASE_URL;
-
-if (!DATABASE_URL) {
+if (!settings.database.url) {
   console.error("❌ DATABASE_URL non définie dans .env");
   process.exit(1);
 }
 
 // Extraire les infos de connexion depuis l'URL
-const matches = DATABASE_URL.match(/postgresql:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/([^?]+)/);
+const matches = settings.database.url.match(/postgresql:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/([^?]+)/);
 
 if (!matches) {
   console.error("❌ Impossible d'extraire les informations de connexion à la base de données.");
