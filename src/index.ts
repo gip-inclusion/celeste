@@ -1,10 +1,14 @@
 import server from './server';
 import prisma from './database';
 
+const NODE_ENV = process.env.NODE_ENV || "development";
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const HOST = process.env.HOST || "0.0.0.0";
+
 async function main() {
     try {
-        await server.listen({ port: 3000, host: "0.0.0.0" });
-        console.log("🚀 Serveur démarré sur http://localhost:3000");
+        await server.listen({ port: PORT, host: HOST });
+        console.log(`🚀 Serveur démarré sur http://${HOST}:${PORT} [environment=${NODE_ENV}]`);
     } catch (err) {
         console.error(err);
         process.exit(1);
