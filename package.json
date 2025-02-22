@@ -11,14 +11,26 @@
     "build": "npm run db:client:generate && tsc",
     "start": "npm run db:migrate:prod && node dist/index",
     "dev": "npm run db:migrate && ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "format": "prettier --write 'src/**/*.ts'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "ts-node": "^10.9.2"
+    "@eslint/js": "^9.21.0",
+    "@typescript-eslint/eslint-plugin": "^8.24.1",
+    "@typescript-eslint/parser": "^8.24.1",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.2",
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.24.1"
   },
   "dependencies": {
     "@fastify/swagger": "^9.4.2",
