@@ -1,18 +1,32 @@
+import crypto from "crypto";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { verifyAdminApiToken } from "../../middleware/adminAuth";
 import prisma from "../../database";
-import crypto from "crypto";
 
 export default function (fastify: FastifyInstance, opts: any, done: () => void) {
 
     fastify.addHook("preHandler", verifyAdminApiToken);
 
-    fastify.get("/", async (request, reply) => {
+    fastify.get("/", {
+        schema: {
+            description: 'List all clients',
+            tags: ['Clients'],
+            summary: 'List all events',
+            security: [{ apiKey: [] }],
+        }
+    }, async (request, reply) => {
         const clients = await prisma.client.findMany();
         return reply.send(clients);
     });
 
-    fastify.post("/", async (request, reply) => {
+    fastify.post("/", {
+        schema: {
+            description: 'Declare a new client',
+            tags: ['Clients'],
+            summary: 'Declare a new client',
+            security: [{ apiKey: [] }],
+        }
+    }, async (request, reply) => {
         const { name, source } = request.body as { name: string; source: string };
 
         if (!name || !source) {

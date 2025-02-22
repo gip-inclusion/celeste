@@ -69,8 +69,10 @@ curl -X POST "http://localhost:3000/api/events" \
         }'
 ```
 
-**9/** Lancer Prisma Studio pour monitorer les données (de préférence, dans un autre onglet) et accéder à l'URL (localhost:5555) 
+**9/** Lancer Prisma Studio pour monitorer les données (de préférence, dans un autre onglet) et accéder à l'URL http://localhost:5555
 
 ```
 npm run db:studio
 ```
+
+**10/** Accéder à la documentation Swagger / OpenAPI (v3) à l'URL http://localhost:3000/docs

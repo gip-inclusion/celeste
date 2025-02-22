@@ -24,13 +24,25 @@ export default function (fastify: FastifyInstance, opts: any, done: () => void) 
 
     fastify.addHook("preHandler", verifyApiToken);
 
-    fastify.get("/", async (request, reply) => {
-        const events = await prisma.event.findMany();
-        return reply.send(events);
-    });
+    fastify.get("/", {
+        schema: {
+            description: 'List all events',
+            tags: ['Events'],
+            summary: 'List all events',
+            security: [{ apiKey: [] }],
+        }
+    },
+        async (request, reply) => {
+            const events = await prisma.event.findMany();
+            return reply.send(events);
+        });
 
     fastify.post("/", {
         schema: {
+            description: 'Publish an event',
+            tags: ['Events'],
+            summary: 'Publish an event',
+            security: [{ apiKey: [] }],
             body: {
                 type: "object",
                 required: ["event_type", "event_source", "event_timestamp", "actor_sub", "actor_type"],

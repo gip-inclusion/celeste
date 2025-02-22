@@ -1,18 +1,15 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import { FastifyInstance } from "fastify";
 import eventRoutes from "./events";
 import adminClientRoutes from "./admin/clients";
 
-export default function (fastify: FastifyInstance, opts: any, done: () => void) {
 
-    fastify.decorateRequest('client', null)
+export async function registerApiRoutes(fastify: FastifyInstance) {
+    fastify.decorateRequest("client", null);
 
     fastify.get("/", async () => {
         return { message: "Celeste API is running 🚀" };
     });
 
-    fastify.register(eventRoutes, { prefix: '/events' });
-
-    fastify.register(adminClientRoutes, { prefix: '/admin/clients' });
-
-    done();
+    await fastify.register(eventRoutes, { prefix: "/api/events" });
+    await fastify.register(adminClientRoutes, { prefix: "/api/admin/clients" });
 }
