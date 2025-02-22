@@ -15,6 +15,9 @@ const settings = {
   api: {
     adminToken: process.env.ADMIN_API_TOKEN,
   },
+  logger: {
+    level: process.env.LOG_LEVEL || 'info',
+  },
 };
 
 export default settings;

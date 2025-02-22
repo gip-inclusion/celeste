@@ -84,9 +84,9 @@ export default function (fastify: FastifyInstance, opts: any, done: () => void) 
             where: { id: requestBody.event_id },
           });
           if (existingEvent) {
-            return reply
-              .status(409)
-              .send({ error: `Event with ID ${requestBody.event_id} already exists` });
+            return reply.status(409).send({
+              error: `Event with ID ${requestBody.event_id} already exists`,
+            });
           }
         }
 
@@ -108,7 +108,7 @@ export default function (fastify: FastifyInstance, opts: any, done: () => void) 
 
         return reply.status(201).send({ message: 'Event created', event });
       } catch (error) {
-        console.error('Error inserting event:', error);
+        request.log.error('Error inserting event:', error);
         return reply.status(500).send({ error: 'Internal Server Error' });
       }
     },

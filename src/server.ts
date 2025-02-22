@@ -2,15 +2,16 @@ import Fastify from 'fastify';
 import { registerApiRoutes } from './api';
 import { registerSwagger } from './swagger';
 import prisma from './database';
+import logger from './logger';
 
-const fastify = Fastify({ logger: true });
+const fastify = Fastify({ logger });
 
 registerSwagger(fastify);
 
 registerApiRoutes(fastify);
 
 fastify.addHook('onClose', async () => {
-  console.log('🔌 Fermeture de Prisma...');
+  fastify.log.info('🔌 Fermeture de Prisma...');
   await prisma.$disconnect();
 });
 
@@ -22,9 +23,9 @@ export async function startServer() {
     // 📌 Générer la documentation Swagger
     fastify.swagger();
 
-    console.log('🚀 Serveur prêt, Swagger généré !');
+    fastify.log.info('🚀 Serveur prêt, Swagger généré !');
   } catch (err) {
-    console.error('❌ Erreur au démarrage du serveur :', err);
+    fastify.log.error('❌ Erreur au démarrage du serveur :', err);
     process.exit(1);
   }
 }

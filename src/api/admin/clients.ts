@@ -48,7 +48,7 @@ export default function (fastify: FastifyInstance, opts: any, done: () => void) 
 
         return reply.status(201).send(client);
       } catch (error) {
-        console.error('Error creating client:', error);
+        request.log.error('Error creating client:', error);
         return reply.status(500).send({ error: 'Internal Server Error' });
       }
     },

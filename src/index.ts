@@ -8,9 +8,9 @@ async function main() {
       port: settings.server.port,
       host: settings.server.host,
     });
-    console.log(`🚀 Serveur démarré sur ${address} [environment=${settings.environment}]`);
+    fastify.log.info(`🚀 Serveur démarré sur ${address} [environment=${settings.environment}]`);
   } catch (err) {
-    console.error(err);
+    fastify.log.error(err);
     process.exit(1);
   }
 }

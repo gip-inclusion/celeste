@@ -1,8 +1,7 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "eslint.validate": [
-    "typescript"
-  ],
-  "nuxt.isNuxtApp": false
+  "eslint.validate": ["typescript"],
+  "nuxt.isNuxtApp": false,
+  "editor.tabSize": 2
 }
