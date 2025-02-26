@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import prisma from '../database';
+import prisma from '../../database';
 import { AuthenticatedRequest, verifyApiToken } from '../middleware/auth';
 
 const ALLOWED_EVENT_SOURCES = [

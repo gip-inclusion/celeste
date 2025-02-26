@@ -1,5 +1,5 @@
 import fastify, { startServer } from './server';
-import settings from './settings';
+import settings from '../settings';
 
 async function main() {
   try {
