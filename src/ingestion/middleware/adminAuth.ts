@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import settings from '../settings';
+import settings from '../../settings';
 
 export async function verifyAdminApiToken(request: FastifyRequest, reply: FastifyReply) {
   const apiToken = request.headers['x-api-token'];

@@ -1,7 +1,7 @@
 import Fastify from 'fastify';
 import { registerApiRoutes } from './api';
 import { registerSwagger } from './swagger';
-import prisma from './database';
+import prisma from '../database';
 import logger from './logger';
 
 const fastify = Fastify({ logger });

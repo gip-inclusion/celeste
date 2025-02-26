@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import prisma from '../database';
+import prisma from '../../database';
 import { Client } from '@prisma/client';
 
 export interface AuthenticatedRequest extends FastifyRequest {

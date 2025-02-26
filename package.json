@@ -10,6 +10,7 @@
     "db:studio": "npx prisma studio",
     "build": "npm run db:client:generate && tsc",
     "start": "npm run db:migrate:prod && node dist/ingestion/index",
+    "manage:processing": "npm run db:migrate && ts-node src/processing/index.ts",
     "dev": "npm run db:migrate && ts-node src/ingestion/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint 'src/**/*.ts'",
