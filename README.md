@@ -60,7 +60,6 @@ curl -X POST "http://localhost:3000/api/events" \
      -H "x-api-token: < le_token_du_client >" \
      -d '{
           "event_type": "if.application.submitted",
-          "event_source": "immersion-facilitee",
           "event_timestamp": "2025-02-19T19:45:00Z",
           "event_correlation_id": "abcd-1234",
           "actor_sub": "user@example.com",
@@ -76,3 +75,9 @@ npm run db:studio
 ```
 
 **10/** Accéder à la documentation Swagger / OpenAPI (v3) à l'URL http://localhost:3000/docs
+
+**11/** Il est possible de générer des évènements (ainsi que des clients si nécessaire) grâce à la tâche `db:seed <nb_events>` :
+
+```
+npm run db:seed 50000
+```

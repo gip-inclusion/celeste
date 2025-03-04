@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { FastifyInstance } from 'fastify';
 import { verifyAdminApiToken } from '../../middleware/adminAuth';
-import prisma from '../../database';
+import prisma from '../../../database';
 
 export default function (fastify: FastifyInstance, opts: unknown, done: () => void) {
   fastify.addHook('preHandler', verifyAdminApiToken);

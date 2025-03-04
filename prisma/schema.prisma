@@ -42,4 +42,30 @@ model Event {
   // Relationships
   clientId       String   @db.VarChar(255)
   client         Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  // Relation Many-to-Many avec Execution via ExecutionEvent
+  executions ExecutionEvent[]
+}
+
+model Execution {
+  id                           String   @id @default(uuid())
+  startedAt                    DateTime @default(now())
+  endedAt                      DateTime?
+  lastProcessedEventCreatedAt  DateTime?
+  status                       String   @default("pending") // pending, successed, failed (inspired by Kubernetes pod states)
+  createdAt                    DateTime @default(now())
+  updatedAt                    DateTime @updatedAt
+
+  // Relation Many-to-Many avec Event via la table pivot ExecutionEvent
+  processedEvents ExecutionEvent[]
+}
+
+model ExecutionEvent {
+  executionId String
+  eventId     String
+
+  execution Execution @relation(fields: [executionId], references: [id], onDelete: Cascade)
+  event     Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@id([executionId, eventId]) // Clé primaire composite pour éviter les doublons
 }

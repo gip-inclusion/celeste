@@ -1,16 +1,6 @@
 import { FastifyInstance } from 'fastify';
-import prisma from '../database';
+import prisma from '../../database';
 import { AuthenticatedRequest, verifyApiToken } from '../middleware/auth';
-
-const ALLOWED_EVENT_SOURCES = [
-  'data-inclusion',
-  'dora',
-  'emplois',
-  'immersion-facilitee',
-  'marche',
-  'mon-recap',
-  'rdv-insertion',
-];
 
 const ALLOWED_ACTOR_TYPES = ['admin', 'beneficiary', 'purchaser', 'employee', 'prescriber'];
 
@@ -27,7 +17,7 @@ export default function (fastify: FastifyInstance, opts: unknown, done: () => vo
         security: [{ apiKey: [] }],
       },
     },
-    async (request, reply) => {
+    async (_, reply) => {
       const events = await prisma.event.findMany();
       return reply.send(events);
     },
@@ -43,11 +33,10 @@ export default function (fastify: FastifyInstance, opts: unknown, done: () => vo
         security: [{ apiKey: [] }],
         body: {
           type: 'object',
-          required: ['event_type', 'event_source', 'event_timestamp', 'actor_sub', 'actor_type'],
+          required: ['event_type', 'event_timestamp', 'actor_sub', 'actor_type'],
           properties: {
             event_id: { type: 'string', format: 'uuid' },
             event_type: { type: 'string' },
-            event_source: { type: 'string', enum: ALLOWED_EVENT_SOURCES },
             event_timestamp: { type: 'string', format: 'date-time' },
             event_correlation_id: { type: 'string' },
             actor_sub: { type: 'string' },
@@ -58,6 +47,17 @@ export default function (fastify: FastifyInstance, opts: unknown, done: () => vo
             payload: { type: 'object' },
           },
         },
+        examples: [
+          {
+            event_type: 'if.application.submitted',
+            event_timestamp: '2025-02-27T18:58:22.916Z',
+            actor_sub: 'jean-michel.conseiller@example.com',
+            actor_type: 'prescrisber',
+            beneficiary_sub: 'benedicte.ficiaire@example.net',
+            structure_sub: '55327987900672',
+            payload: {},
+          },
+        ],
       },
     },
     async (request, reply) => {
@@ -65,7 +65,6 @@ export default function (fastify: FastifyInstance, opts: unknown, done: () => vo
         const requestBody = request.body as {
           event_id?: string;
           event_type: string;
-          event_source: string;
           event_timestamp: string;
           event_correlation_id?: string;
           actor_sub: string;
@@ -94,7 +93,7 @@ export default function (fastify: FastifyInstance, opts: unknown, done: () => vo
           data: {
             id: finalEventId,
             type: requestBody.event_type,
-            source: requestBody.event_source,
+            source: client.source,
             timestamp: new Date(requestBody.event_timestamp),
             correlationId: requestBody.event_correlation_id,
             actorSub: requestBody.actor_sub,

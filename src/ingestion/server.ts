@@ -1,7 +1,7 @@
 import Fastify from 'fastify';
 import { registerApiRoutes } from './api';
 import { registerSwagger } from './swagger';
-import prisma from './database';
+import prisma from '../database';
 import logger from './logger';
 
 const fastify = Fastify({ logger });
@@ -19,11 +19,12 @@ export async function startServer() {
   try {
     // 📌 Attendre que toutes les routes et plugins soient prêts
     await fastify.ready();
+    fastify.log.info('Fastify prêt.');
 
     // 📌 Générer la documentation Swagger
     fastify.swagger();
 
-    fastify.log.info('🚀 Serveur prêt, Swagger généré !');
+    fastify.log.info('Swagger généré.');
   } catch (err) {
     fastify.log.error('❌ Erreur au démarrage du serveur :', err);
     process.exit(1);
