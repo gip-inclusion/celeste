@@ -60,7 +60,6 @@ curl -X POST "http://localhost:3000/api/events" \
      -H "x-api-token: < le_token_du_client >" \
      -d '{
           "event_type": "if.application.submitted",
-          "event_source": "immersion-facilitee",
           "event_timestamp": "2025-02-19T19:45:00Z",
           "event_correlation_id": "abcd-1234",
           "actor_sub": "user@example.com",
