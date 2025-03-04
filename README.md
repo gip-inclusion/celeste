@@ -75,3 +75,9 @@ npm run db:studio
 ```
 
 **10/** Accéder à la documentation Swagger / OpenAPI (v3) à l'URL http://localhost:3000/docs
+
+**11/** Il est possible de générer des évènements (ainsi que des clients si nécessaire) grâce à la tâche `db:seed <nb_events>` :
+
+```
+npm run db:seed 50000
+```

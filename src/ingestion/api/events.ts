@@ -47,6 +47,17 @@ export default function (fastify: FastifyInstance, opts: unknown, done: () => vo
             payload: { type: 'object' },
           },
         },
+        examples: [
+          {
+            event_type: 'if.application.submitted',
+            event_timestamp: '2025-02-27T18:58:22.916Z',
+            actor_sub: 'jean-michel.conseiller@example.com',
+            actor_type: 'prescrisber',
+            beneficiary_sub: 'benedicte.ficiaire@example.net',
+            structure_sub: '55327987900672',
+            payload: {},
+          },
+        ],
       },
     },
     async (request, reply) => {
